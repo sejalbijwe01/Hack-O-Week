@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagabond Ventures | Explore India</title>
+    <style>
+        :root {
+            --primary: #2d3436;
+            --accent: #e67e22; /* Sunset Orange */
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1524492707947-2f85a512d7fb?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        header h1 { font-size: 3.5rem; margin: 0; letter-spacing: 4px; }
+        header p { font-size: 1.2rem; opacity: 0.9; }
+
+        .container {
+            max-width: 1100px;
+            margin: -60px auto 50px;
+            padding: 0 20px;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .trip-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+
+        .trip-card:hover { transform: translateY(-10px); }
+
+        .trip-image { width: 100%; height: 230px; object-fit: cover; }
+
+        .trip-content { padding: 25px; }
+
+        .trip-tag {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        h2 { margin: 0 0 15px 0; font-size: 1.5rem; }
+
+        .read-more-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .read-more-btn:hover { background: #d35400; }
+
+        /* Modal / Pop-up Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 40px;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 20px;
+            position: relative;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 35px;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover { color: var(--accent); }
+
+        .footer { text-align: center; padding: 40px; color: #636e72; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>WORLDWIDE VENTURES</h1>
+    <p>Capturing the Soul of the Journey</p>
+</header>
+
+<div class="container">
+    <div class="blog-grid">
+        
+        <article class="trip-card">
+            <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&w=600&q=80" class="trip-image">
+            <div class="trip-content">
+                <span class="trip-tag"> India : Taj Mahal</span>
+                <h2>Spice, Silk & Spirituality</h2>
+                <p>The air in Varanasi smells of incense and history. From the bustling markets of Delhi to the quiet ghats...</p>
+                <button class="read-more-btn" onclick="openModal('India', 'India is a land that stays with you forever. My journey through the Golden Triangle was a whirlwind of colors. In Jaipur, the Hawa Mahal stood like a pink dream against the blue sky. But the highlight? Eating hot samosas while watching the sun set over the Taj Mahal in Agra. Every corner of India tells a story of 5,000 years of culture.')">Read More</button>
+<a href="https://www.google.com/maps/place/Taj+Mahal/" 
+   target="_blank" 
+   class="read-more-btn" 
+   style="text-decoration:none; display:inline-block;">
+   View Location
+</a>
+
+            </div>
+        </article>
+
+        <article class="trip-card">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80" class="trip-image">
+            <div class="trip-content">
+                <span class="trip-tag">Indonesia</span>
+                <h2>The Lost Shores of Bali</h2>
+                <p>Uluwatu offers more than just surf; it offers a peace that I haven't found anywhere else in the world...</p>
+                <button class="read-more-btn" onclick="openModal('Bali', 'Bali is more than just a destination; it\'s a state of mind. I spent a week in Ubud exploring rice terraces and learning traditional wood carving. The monkeys at the Sacred Forest were mischievous, but the Balinese hospitality was the warmest I have ever experienced.')">Read More</button>
+<a href="https://www.google.com/maps/place/Bali,+Indonesia/" 
+   target="_blank" 
+   class="read-more-btn location-btn">
+   View Location
+</a>
+
+            </div>
+        </article>
+
+        <article class="trip-card">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80" class="trip-image">
+            <div class="trip-content">
+                <span class="trip-tag">Japan</span>
+                <h2>Neon Lights & Zen Gardens</h2>
+                <p>Tokyo is a beautiful contradiction. One minute you're lost in a sea of neon, the next you're in a silent temple...</p>
+                <button class="read-more-btn" onclick="openModal('Japan', 'Kyoto in the spring is a literal painting. I spent hours walking through the Fushimi Inari Shrine, under thousands of vermillion torii gates. In Tokyo, I found a tiny ramen shop in an alleyway that served the best meal of my life for five dollars. Japan taught me that technology and tradition don\'t just coexist; they dance.')">Read More</button>
+<a href="https://www.google.com/maps/place/Fushimi+Inari+Taisha/" 
+   target="_blank" 
+   class="read-more-btn location-btn">
+   View Location
+</a>
+
+            </div>
+        </article>
+
+        <article class="trip-card">
+            <img src="https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=600&q=80" class="trip-image">
+            <div class="trip-content">
+                <span class="trip-tag">Iceland</span>
+                <h2>Fire, Ice, and Folklore</h2>
+                <p>The landscape of Iceland feels like another planet. Volcanic black sands meet crashing Atlantic waves...</p>
+                <button class="read-more-btn" onclick="openModal('Iceland', 'Driving the Ring Road felt like exploring the moon. I soaked in the Blue Lagoon while the air was freezing, and later that night, the Aurora Borealis danced overhead in ribbons of green and violet. It’s a place where you truly feel the raw power of the Earth beneath your feet.')">Read More</button>
+<a href="https://www.google.com/maps/place/Blue+Lagoon,+Iceland/" 
+   target="_blank" 
+   class="read-more-btn location-btn">
+   View Location
+</a>
+
+            </div>
+        </article>
+
+        <article class="trip-card">
+            <img src="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?auto=format&fit=crop&w=600&q=80" class="trip-image">
+            <div class="trip-content">
+                <span class="trip-tag">Morocco</span>
+                <h2>The Labyrinth of Marrakech</h2>
+                <p>The air is thick with the smell of cumin and leather. Navigation is impossible, but getting lost is the point...</p>
+                <button class="read-more-btn" onclick="openModal('Morocco', 'In the heart of the Medina, the colors are overwhelming. I spent my days bargaining for hand-woven rugs and drinking mint tea with shopkeepers. By night, I stayed in a Riad with a courtyard full of orange trees. Morocco isn\'t just a country; it\'s a sensory explosion that demands your full attention.')">Read More</button>
+<a href="https://www.google.com/maps/place/Marrakesh,+Morocco/" 
+   target="_blank" 
+   class="read-more-btn location-btn">
+   View Location
+</a>
+
+            </div>
+        </article>
+    </div>
+</div>
+
+<div id="storyModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle" style="color: var(--accent);"></h2>
+        <p id="modalBody" style="font-size: 1.1rem; color: #444;"></p>
+    </div>
+</div>
+
+<div class="footer">
+    <p>©️ 2026 Vagabond Ventures | Share Your Story</p>
+</div>
+
+<script>
+    function openModal(title, text) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalBody').innerText = text;
+        document.getElementById('storyModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('storyModal').style.display = "none";
+    }
+
+    // Close modal if user clicks outside of it
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('storyModal')) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
