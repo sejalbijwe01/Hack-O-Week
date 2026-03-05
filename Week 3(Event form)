@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Registration Form</title>
+<style>
+body{
+background-image:url("C:/Users/Sejal/OneDrive/Pictures/4.jpg");
+background-size:cover;
+background-repeat:no-repeat;
+}
+.form-box{
+width:400px;
+margin:50px auto;
+padding:20px;
+border:2px solid;
+border-radius:10px;
+}
+</style>
+</head>
+<body>
+<h1 style="text-align:center;color:red;">SYMBIOSIS INSTITUTE OF TECHNOLOGY, NAGPUR</h1>
+<h2 style="text-align:center;">Registration Form For Yoga Competition</h2>
+<form action="/submit-registrztion" method="post">
+<div class="form-box">
+<center>
+<label for="email">Email ID:*</label>
+<input type="email" id="email name="email><br><br>
+            <label for="name">Name of Student:*</label>
+            <input type="text"  name="name"><br><br>
+            <label for="prn">PRN Number:*</label>
+            <input type="number"  name="prn" ><br><br>
+<input type="date" name="bday"><br><br>
+            <label>Section:*</label><br>
+            <input type="radio" id="section" name="section" value="1">
+            <label for="section">A</label>
+            <input type="radio" id="section" name="section" value="2">
+            <label for="section">B</label><br>
+            <input type="radio" id="section" name="section" value="3">
+            <label for="section">C</label>
+            <input type="radio" id="section" name="section" value="4">
+            <label for="section">D</label><br><br>
+            
+           <label for="semester">Semester:*</label>
+<select id="section" name="semester">
+            
+                <option value="Sem 1">Sem 1</option>
+                <option value="Sem 2">Sem 2</option>
+                <option value="Sem 3">Sem 3</option>
+                <option value="Sem 4">Sem 4</option>
+<option value="Sem 5">Sem 5</option>
+<option value="Sem 6">Sem6</option>
+<option value="Sem 7">Sem 7</option>
+<option value="Sem 8">Sem 8</option>
+</select><br><br>
+ <label>participating:*</label>
+            <input type="radio" id="Y" name="section" value="1">
+            <label for="section">Yes</label>
+            <input type="radio" id="N" name="section" value="2">
+            <label for="section">No</label><br><br>
+ <label>Yoga events:</label>
+            <input type="checkbox" id="A" name="options" value="1">
+            <label for="A">Artistic</label><br>
+            <input type="checkbox" id="R" name="options" value="2">
+            <label for="R">Rhythmic</label><br>
+            <input type="checkbox" id="T" name="options" value="3">
+            <label for="T">Traditional</label><br><br>
+<label for="contact">Contact number:*</label>
+<input type="number" name="contact"><br><br>
+<label>if any medical report:</label>
+<input type="file" name="fileupload" accept="image"><br>
+<input type="color" name="pink">
+<br><br><br>
+<div class="btn-group">
+                <button type="submit" class="btn">Submit</button>
+                <button type="reset" class="btn btn-reset">Reset</button>
+
+</div>
+</center>
+
+</body>
+</html>
