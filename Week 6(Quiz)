@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Quiz Creator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .form-section, .quiz-section {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e1e8ff;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ff;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .option-input-group input {
+            flex: 1;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+        }
+
+        .questions-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .question-item {
+            background: white;
+            border: 2px solid #e1e8ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .question-item:hover {
+            border-color: #4facfe;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.1);
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .options-display {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-display {
+            padding: 10px;
+            background: #f0f4ff;
+            border-radius: 8px;
+            border-left: 4px solid #4facfe;
+        }
+
+        .correct-option {
+            border-left-color: #51cf66;
+            background: #e8f5e8;
+        }
+
+        .quiz-area {
+            display: none;
+        }
+
+        .quiz-question {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border-left: 5px solid #4facfe;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e1e8ff;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .quiz-option:hover {
+            border-color: #4facfe;
+            background: #f8fbff;
+        }
+
+        .quiz-option.selected {
+            border-color: #51cf66;
+            background: #e8f5e8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e1e8ff;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #51cf66;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Quiz Creator</h1>
+            <p>Create professional quizzes with custom questions and options</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-section" id="formSection">
+                <h2 class="section-title">📝 Create Question</h2>
+                
+                <div class="form-group">
+                    <label>Question</label>
+                    <textarea id="questionInput" placeholder="Enter your question here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Correct Answer</label>
+                    <select id="correctAnswer">
+                        <option value="">Select correct option</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Options</label>
+                    <div class="options-container" id="optionsContainer">
+                        <div class="option-input-group">
+                            <input type="text" class="option-input" placeholder="Option 1">
+                            <button type="button" class="btn btn-danger remove-option" style="display:none;">Remove</button>
+                        </div>
+                        <div class="option-input-group">
+                            <input type="text" class="option-input" placeholder="Option 2">
+                            <button type="button" class="btn btn-danger remove-option" style="display:none;">Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn" onclick="addOption()">+ Add Option</button>
+                </div>
+
+                <button class="btn btn-success" onclick="addQuestion()" style="width: 100%; padding: 15px;">✅ Add Question</button>
+
+                <div class="questions-list" id="questionsList"></div>
+                <button class="btn" onclick="startQuiz()" id="startQuizBtn" style="width: 100%; margin-top: 20px; display: none;">🚀 Start Quiz</button>
+            </div>
+
+            <!-- Quiz Section -->
+            <div class="quiz-section" id="quizSection">
+                <h2 class="section-title">📊 Take Quiz</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div id="quizContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let optionCount = 2;
+
+        // Initialize
+        updateCorrectAnswerOptions();
+
+        function addOption() {
+            const container = document.getElementById('optionsContainer');
+            const optionGroup = document.createElement('div');
+            optionGroup.className = 'option-input-group';
+            optionGroup.innerHTML = `
+                <input type="text" class="option-input" placeholder="Option ${optionCount + 1}">
+                <button type="button" class="btn btn-danger remove-option">Remove</button>
+            `;
+            container.appendChild(optionGroup);
+            optionCount++;
+            updateCorrectAnswerOptions();
+            attachRemoveListeners();
+        }
+
+        function attachRemoveListeners() {
+            document.querySelectorAll('.remove-option').forEach(btn => {
+                btn.onclick = function() {
+                    this.parentElement.remove();
+                    updateCorrectAnswerOptions();
+                };
+            });
+        }
+
+        function updateCorrectAnswerOptions() {
+            const options = getOptions();
+            const select = document.getElementById('correctAnswer');
+            select.innerHTML = '<option value="">Select correct option</option>';
+            
+            options.forEach((option, index) => {
+                if (option) {
+                    const opt = document.createElement('option');
+                    opt.value = index;
+                    opt.textContent = option;
+                    select.appendChild(opt);
+                }
+            });
+        }
+
+        function getOptions() {
+            return Array.from(document.querySelectorAll('.option-input')).map(input => input.value.trim());
+        }
+
+        function addQuestion() {
+            const questionText = document.getElementById('questionInput').value.trim();
+            const correctIndex = parseInt(document.getElementById('correctAnswer').value);
+            const options = getOptions();
+
+            if (!questionText || options.filter(Boolean).length < 2 || isNaN(correctIndex)) {
+                alert('Please fill all fields properly');
+                return;
+            }
+
+            const question = {
+                text: questionText,
+                options: options,
+                correctIndex: correctIndex
+            };
+
+            questions.push(question);
+            document.getElementById('questionInput').value = '';
+            document.querySelectorAll('.option-input').forEach(input => input.value = '');
+            optionCount = 2;
+            
+            // Reset form
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = `
+                <div class="option-input-group">
+                    <input type="text" class="option-input" placeholder="Option 1">
+                    <button type="button" class="btn btn-danger remove-option" style="display:none;">Remove</button>
+                </div>
+                <div class="option-input-group">
+                    <input type="text" class="option-input" placeholder="Option 2">
+                    <button type="button" class="btn btn-danger remove-option" style="display:none;">Remove</button>
+                </div>
+            `;
+            document.getElementById('correctAnswer').innerHTML = '<option value="">Select correct option</option>';
+            updateCorrectAnswerOptions();
+
+            renderQuestionsList();
+            document.getElementById('startQuizBtn').style.display = questions.length > 0 ? 'block' : 'none';
+        }
+
+        function renderQuestionsList() {
+            const list = document.getElementById('questionsList');
+            list.innerHTML = questions.map((q, index) => `
+                <div class="question-item">
+                    <div class="question-text">Q${index + 1}: ${q.text}</div>
+                    <div class="options-display">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="option-display ${optIndex === q.correctIndex ? 'correct-option' : ''}">
+                                ${String.fromCharCode(65 + optIndex)}. ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="btn btn-danger" onclick="removeQuestion(${index})" style="width: 100%; margin-top: 15px;">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function removeQuestion(index) {
+            questions.splice(index, 1);
+            renderQuestionsList();
+            document.getElementById('startQuizBtn').style.display = questions.length > 0 ? 'block' : 'none';
+        }
+
+        function startQuiz() {
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('quizSection').style.display = 'block';
+            currentQuestionIndex = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            const progress = ((currentQuestionIndex / questions.length) * 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            const question = questions[currentQuestionIndex];
+            const content = document.getElementById('quizContent');
+            
+            content.innerHTML = `
+                <div class="quiz-question">
+                    <strong>Q${currentQuestionIndex + 1}:</strong> ${question.text}
+                </div>
+                <div class="quiz-options">
+                    ${question.options.map((option, index) => `
+                        <div class="quiz-option" onclick="selectOption(${index})">
+                            ${String.fromCharCode(65 + index)}. ${option}
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="btn" onclick="nextQuestion()" style="width: 100%;">Next</button>
+                </div>
+            `;
+        }
+
+        function selectOption(index) {
+            document.querySelectorAll('.quiz-option').forEach((opt, i) => {
+                opt.classList.toggle('selected', i === index);
+            });
+        }
+
+        function nextQuestion() {
+            const selected = document.querySelector('.quiz-option.selected');
+            if (!selected) {
+                alert('Please select an option');
+                return;
+            }
+
+            const selectedIndex = Array.from(document.querySelectorAll('.quiz-option')).indexOf(selected);
+            if (selectedIndex === questions[currentQuestionIndex].correctIndex) {
+                score++;
+            }
+
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('quizContent').innerHTML = `
+                <div class="score-display">
+                    ${score}/${questions.length} 
+                    <span style="color: #666; font-size: 0.6em;">(${percentage}%)</span>
+                </div>
+                <div style="text-align: center; margin: 30px 0;">
+                    <h3 style="color: #333; margin-bottom: 20px;">Great Job!</h3>
+                    <button class="btn" onclick="restartQuiz()" style="width: 100%;">🔄 Create New Quiz</button>
+                </div>
+            `;
+        }
+
+        function restartQuiz() {
+            questions = [];
+            document.getElementById('formSection').style.display = 'block';
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('startQuizBtn').style.display = 'none';
+            document.getElementById('questionsList').innerHTML = '';
+            document.getElementById('formSection').scrollIntoView();
+        }
+
+        // Event listeners
+        attachRemoveListeners();
+    </script>
+</body>
+</html>
