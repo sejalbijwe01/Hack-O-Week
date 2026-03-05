@@ -1,119 +1,333 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Event Registration</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>TechNova 2024 Registration</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+}
+
+:root{
+--primary:#4a90e2;
+--secondary:#2c3e50;
+--bg:#011113d8;
+--card:#ffffffd8;
+}
+
+body{
+background:var(--bg);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+.main-container{
+background:var(--card);
+max-width:600px;
+width:100%;
+padding:40px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.form-header{
+text-align:center;
+margin-bottom:25px;
+}
+
+.form-header h1{
+color:var(--primary);
+font-size:2.3rem;
+}
+
+.event-info-banner{
+background:#e3f2fd;
+padding:10px;
+border-radius:5px;
+margin-top:10px;
+display:flex;
+justify-content:center;
+gap:20px;
+font-weight:bold;
+}
+
+fieldset{
+border:1px solid #ddd;
+padding:20px;
+margin-bottom:20px;
+border-radius:5px;
+}
+
+legend{
+font-weight:bold;
+color:var(--secondary);
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+label{
+display:block;
+margin-bottom:6px;
+font-weight:600;
+}
+
+input,select{
+width:100%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.row{
+display:flex;
+gap:15px;
+}
+
+.radio-group label,
+.checkbox-group label{
+display:inline-block;
+margin-right:15px;
+font-weight:normal;
+}
+
+.submit-btn{
+width:100%;
+padding:15px;
+background:var(--primary);
+color:white;
+border:none;
+border-radius:5px;
+font-size:1.1rem;
+font-weight:bold;
+cursor:pointer;
+}
+
+.submit-btn:hover{
+background:#357abd;
+}
+
+/* Success screen */
+.success{
+display:none;
+text-align:center;
+padding:40px;
+}
+
+.success h1{
+color:#4a90e2;
+margin-bottom:10px;
+}
+
+.success a{
+display:inline-block;
+margin-top:20px;
+background:#4a90e2;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+border-radius:5px;
+}
+
+@media(max-width:500px){
+.row{
+flex-direction:column;
+}
+.event-info-banner{
+flex-direction:column;
+gap:5px;
+}
+}
+</style>
+
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="form-header">
-            <h1>TechNova 2024</h1>
-            <p>Student Registration Form</p>
-            <div class="event-info-banner">
-                <span>📅 March 24th - 26th, 2024</span>
-                <span>📍 Main Campus Auditorium</span>
-            </div>
-        </div>
+<div class="main-container">
 
-        <form id="registrationForm" class="registration-form">
-            
-            <fieldset>
-                <legend>Personal Details</legend>
-                <div class="form-group">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" placeholder="e.g. John Doe" required>
-                </div>
+<div id="formSection">
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="e.g. john@university.edu" required>
-                </div>
+<div class="form-header">
+<h1>TechNova 2024</h1>
+<p>Student Registration Form</p>
 
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="e.g. 123-456-7890">
-                </div>
-            </fieldset>
+<div class="event-info-banner">
+<span>📅 March 24 - 26</span>
+<span>📍 Main Campus Auditorium</span>
+</div>
+</div>
 
-            <fieldset>
-                <legend>Academic Information</legend>
-                <div class="row">
-                    <div class="form-group">
-                        <label for="rollno">Roll Number / ID</label>
-                        <input type="text" id="rollno" name="rollno" required>
-                    </div>
+<form id="registrationForm">
 
-                    <div class="form-group">
-                        <label for="dept">Department</label>
-                        <select id="dept" name="dept" required>
-                            <option value="">Select Department</option>
-                            <option value="cs">Computer Science</option>
-                            <option value="it">Information Tech</option>
-                            <option value="ece">Electronics (ECE)</option>
-                            <option value="mech">Mechanical</option>
-                            <option value="civil">Civil</option>
-                        </select>
-                    </div>
-                </div>
+<fieldset>
+<legend>Personal Details</legend>
 
-                <div class="form-group">
-                    <label>Year of Study</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="year" value="1" required> 1st Year</label>
-                        <label><input type="radio" name="year" value="2"> 2nd Year</label>
-                        <label><input type="radio" name="year" value="3"> 3rd Year</label>
-                        <label><input type="radio" name="year" value="4"> 4th Year</label>
-                    </div>
-                </div>
-            </fieldset>
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" name="fullname" required>
+</div>
 
-            <fieldset>
-                <legend>Event Details</legend>
-                
-                <div class="row">
-                    <div class="form-group">
-                        <label for="event-date">Preferred Date</label>
-                        <input type="date" id="event-date" name="event-date" min="2024-03-24" max="2024-03-26" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="venue-pref">Venue Block Preference</label>
-                        <select id="venue-pref" name="venue-pref">
-                            <option value="audi-a">Main Auditorium (Block A)</option>
-                            <option value="audi-b">Seminar Hall (Block B)</option>
-                            <option value="open-ground">Open Grounds</option>
-                        </select>
-                    </div>
-                </div>
+<div class="form-group">
+<label>Email</label>
+<input type="email" name="email" required>
+</div>
 
-                <div class="form-group">
-                    <label for="event-main">Main Event</label>
-                    <select id="event-main" name="event-main" required>
-                        <option value="">Choose an Event</option>
-                        <option value="hackathon">Coding Hackathon</option>
-                        <option value="robotics">RoboWars</option>
-                        <option value="debate">Open Debate</option>
-                        <option value="gaming">eSports Tournament</option>
-                    </select>
-                </div>
+<div class="form-group">
+<label>Phone</label>
+<input type="tel" name="phone">
+</div>
 
-                <div class="form-group">
-                    <label>Add-on Workshops (Optional)</label>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" name="workshop" value="ai"> AI/ML Workshop</label>
-                        <label><input type="checkbox" name="workshop" value="cyber"> Cyber Security</label>
-                        <label><input type="checkbox" name="workshop" value="cloud"> Cloud Computing</label>
-                    </div>
-                </div>
-            </fieldset>
+</fieldset>
 
-            <button type="submit" class="submit-btn">Register Now</button>
-        </form>
-    </div>
 
-<script src="event.js"></script>
+<fieldset>
+<legend>Academic Info</legend>
+
+<div class="row">
+
+<div class="form-group">
+<label>Roll Number</label>
+<input type="text" name="rollno" required>
+</div>
+
+<div class="form-group">
+<label>Department</label>
+<select name="dept" required>
+<option value="">Select</option>
+<option>Computer Science</option>
+<option>IT</option>
+<option>ECE</option>
+<option>Mechanical</option>
+<option>Civil</option>
+</select>
+</div>
+
+</div>
+
+<div class="form-group">
+<label>Year</label>
+
+<div class="radio-group">
+<label><input type="radio" name="year" value="1">1st</label>
+<label><input type="radio" name="year" value="2">2nd</label>
+<label><input type="radio" name="year" value="3">3rd</label>
+<label><input type="radio" name="year" value="4">4th</label>
+</div>
+
+</div>
+</fieldset>
+
+
+<fieldset>
+<legend>Event Details</legend>
+
+<div class="row">
+
+<div class="form-group">
+<label>Date</label>
+<input type="date" name="eventdate" required>
+</div>
+
+<div class="form-group">
+<label>Venue</label>
+<select name="venue">
+<option>Main Auditorium</option>
+<option>Seminar Hall</option>
+<option>Open Ground</option>
+</select>
+</div>
+
+</div>
+
+<div class="form-group">
+<label>Main Event</label>
+<select name="mainevent" required>
+<option value="">Choose</option>
+<option>Coding Hackathon</option>
+<option>RoboWars</option>
+<option>Debate</option>
+<option>Gaming Tournament</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Workshops</label>
+
+<div class="checkbox-group">
+<label><input type="checkbox" name="workshop" value="AI ML">AI/ML</label>
+<label><input type="checkbox" name="workshop" value="Cyber">Cyber Security</label>
+<label><input type="checkbox" name="workshop" value="Cloud">Cloud Computing</label>
+</div>
+
+</div>
+
+</fieldset>
+
+<button class="submit-btn">Register</button>
+
+</form>
+</div>
+
+
+<div id="successSection" class="success">
+<h1>✅ Registration Successful</h1>
+<p>Your data has been saved.</p>
+<p>The Excel file has been downloaded.</p>
+
+<a onclick="location.reload()">Register Another Student</a>
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("registrationForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+const f=e.target
+
+const workshops=[]
+document.querySelectorAll('input[name="workshop"]:checked')
+.forEach(w=>workshops.push(w.value))
+
+const table=`
+<table border="1">
+<tr><th>Field</th><th>Value</th></tr>
+<tr><td>Name</td><td>${f.fullname.value}</td></tr>
+<tr><td>Email</td><td>${f.email.value}</td></tr>
+<tr><td>Phone</td><td>${f.phone.value}</td></tr>
+<tr><td>Roll</td><td>${f.rollno.value}</td></tr>
+<tr><td>Department</td><td>${f.dept.value}</td></tr>
+<tr><td>Year</td><td>${f.year.value}</td></tr>
+<tr><td>Date</td><td>${f.eventdate.value}</td></tr>
+<tr><td>Venue</td><td>${f.venue.value}</td></tr>
+<tr><td>Event</td><td>${f.mainevent.value}</td></tr>
+<tr><td>Workshops</td><td>${workshops.join(", ")||"None"}</td></tr>
+</table>
+`
+
+const link=document.createElement("a")
+link.href="data:application/vnd.ms-excel,"+encodeURIComponent(table)
+link.download="TechNova_Registration.xls"
+link.click()
+
+document.getElementById("formSection").style.display="none"
+document.getElementById("successSection").style.display="block"
+
+})
+
+</script>
+
 </body>
 </html>
+```
